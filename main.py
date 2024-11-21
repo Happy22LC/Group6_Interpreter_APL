@@ -64,13 +64,11 @@ def main():
 
             # Automatically prompt for a print statement if it's an assignment
             if any(isinstance(stmt, AssignNode) for stmt in statements):
-                var_name = statements[0].var_name  # Get the variable name from the first assignment
-                print_statement = f"print({var_name});"
-                # print(f"Automatically prompting for: {print_statement}")
-                code = input(f"Prompt to print: ")
+                code2 = input(f"Enter variable e.g.'print(a);' to display the output: ")
+                lexer2 = Lexer(code2)
 
                 # Tokenize and parse the auto-generated print statement
-                print_tokens = Lexer(print_statement).tokenize()
+                print_tokens = lexer2.tokenize()
                 print("Tokens:", print_tokens)  # Debugging output
 
                 print_parser = Parser(print_tokens)
