@@ -62,7 +62,7 @@ from interpreter import Interpreter
 
 
 def main():
-    print("Enter your code below (use ';' to separate statements, and type 'exit' to quit):")
+    print("Enter your code (use ';' to separate statements, and type 'exit' to quit):")
     code = ""
     while True:
         try:
