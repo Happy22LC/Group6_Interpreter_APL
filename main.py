@@ -1,36 +1,4 @@
-''' from lexer import Lexer
-from parser import Parser
-from interpreter import Interpreter
-
-
-def main():
-    # This is the main loop for the interpreter. It continuously takes input from the user.
-    while True:
-        code = input("Enter code (or type 'exit' to quit): ")
-        if code.lower() == 'exit':
-            break
-
-        lexer = Lexer(code)
-        try:
-            # Tokenize the input code
-            tokens = lexer.tokenize()
-            print("Tokens:", tokens)  # display tokens
-            # Parse the tokens to generate the Abstract Syntax Tree (AST)
-            parser = Parser(tokens)
-            statements = parser.parse()
-
-            # Pass the parsed AST (statements) to the Interpreter
-            interpreter = Interpreter(statements)
-            interpreter.interpret()  # Interpret the parsed statements
-        except SyntaxError as e:
-            print("Error:", e)  # Catch and display syntax errors
-        except Exception as e:
-            print("Runtime Error:", e)  # Catch and display other runtime errors
-
-
-if __name__ == "__main__":
-    main() '''
-
+"""
 
 from ast_nodes import AssignNode
 from lexer import Lexer
@@ -84,5 +52,53 @@ def main():
 
 if __name__ == "__main__":
     main()
+"""
+
+# main.py
+
+from lexer import Lexer
+from parser import Parser
+from interpreter import Interpreter
 
 
+def main():
+    print("Enter your code below (use ';' to separate statements, and type 'exit' to quit):")
+    code = ""
+    while True:
+        try:
+            line = input(">>> ")
+        except EOFError:
+            break  # Handle end-of-file (Ctrl+D)
+        if line.strip() == "exit":
+            break
+        code += line + " "  # Accumulate the input code
+
+    # Check if the code ends with a semicolon
+    if not code.strip().endswith(';'):
+        print("Syntax Error: Code must end with a semicolon (';').")
+        return
+
+    try:
+        # Lexical Analysis
+        lexer = Lexer(code)
+        tokens = lexer.tokenize()
+        print("\n--- Lexical Analysis ---")
+        print(f"Tokens: {tokens}")
+
+        # Parsing
+        parser = Parser(tokens)
+        tree = parser.parse()
+        print("\n--- Parsing ---")
+        print(f"AST Tree: {tree}")
+
+        # Interpretation
+        interpreter = Interpreter(tree)
+        print("\n--- Interpretation ---")
+        interpreter.interpret()
+    except Exception as e:
+        print("Invalid input. Please check the code you typed.")
+        print(e)
+
+
+if __name__ == "__main__":
+    main()
