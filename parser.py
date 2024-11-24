@@ -25,7 +25,7 @@ class Parser:
             raise SyntaxError(f"Unexpected token: {current_token}")
 
     def _parse_assignment(self):
-        # Parse variable assignment statements
+        # Parse variable assignment
         self._expect('LET')
         var_name = self._expect('ID')[1]
         self._expect('ASSIGN')

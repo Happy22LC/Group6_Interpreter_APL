@@ -15,9 +15,13 @@ def main():
             break
         if line.strip() == "output":
             break
-        code += line + " "  # Accumulate the input code
+        code += line + " "
 
-    # Check if the code ends with a semicolon
+    if not code.strip():
+        print("No code provided. Please Enter the code.")
+        return
+
+    # Check ends with a semicolon
     if not code.strip().endswith(';'):
         print("Syntax Error: Code must end with a semicolon (';').")
         return

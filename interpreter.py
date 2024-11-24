@@ -4,7 +4,7 @@ from ast_nodes import AssignNode, PrintNode, BinOpNode, NumNode, VarNode
 # Environment class to manage variable storage
 class Environment:
     def __init__(self):
-        self.variables = {}  # Dictionary to store variable names and their values
+        self.variables = {}  # store variable names and their values
 
     def set_variable(self, name, value):
         # Store a variable in the environment
@@ -32,7 +32,7 @@ class Interpreter:
             self._evaluate(node)  # Evaluate each node in the AST
 
     def _evaluate(self, node):
-        # Determine the type of the node and evaluate it accordingly
+        # evaluate the type of the node
         if isinstance(node, AssignNode):  # Handle variable assignments
             self._evaluate_let(node)
         elif isinstance(node, PrintNode):  # Handle print statements
@@ -48,21 +48,21 @@ class Interpreter:
             raise ValueError(f"Unknown node type: {type(node).__name__}")
 
     def _evaluate_let(self, node):
-        # Evaluate a variable assignment
+        # evaluate variable assignment
         var_name = node.var_name  # Get the variable name
         value = self._evaluate(node.expr)  # Evaluate the expression
         self.env.set_variable(var_name, value)  # Store the variable in the environment
 
     def _evaluate_print(self, node):
-        # Evaluate and print an expression
+        # Evaluate and print the expression
         value = self._evaluate(node.expr)  # Evaluate the expression
-        # print(value)  # Print the result
+        # print(value)  # Debugging, Print the result
         print(f"Value : {value}")
 
     def _evaluate_binop(self, node):
         # Evaluate a binary operation
-        left = self._evaluate(node.left)  # Evaluate the left-hand side
-        right = self._evaluate(node.right)  # Evaluate the right-hand side
+        left = self._evaluate(node.left)  # Evaluate left-hand side
+        right = self._evaluate(node.right)  # Evaluate right-hand side
         op = node.op  # Get the operator
 
         # Perform the operation based on the operator

@@ -8,7 +8,7 @@ class AssignNode(ASTNode):
         self.var_name = var_name
         self.expr = expr
 
-    # The __repr__ method in each class ensures that this format is followed when the node is printed or logged.
+    # The __repr__ method in each class for printing or logged the node.
     def __repr__(self):
         return f"AssignNode(var={self.var_name}, expr={repr(self.expr)})"
 
